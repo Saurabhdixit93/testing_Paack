@@ -58,6 +58,7 @@ passport.use(
 
         return done(null, user);
       } catch (error) {
+        console.log(error);
         return done(error);
       }
     }
@@ -78,7 +79,7 @@ passport.deserializeUser((id, done) => {
 app.post("/login", passport.authenticate("local"), (req, res) => {
   if (!req.user) {
     // Authentication failed; handle it as needed.
-    return res.status(401).json({ message: "Authentication failed" });
+    return res.json({ message: "Authentication failed",success:false });
   }
 
   // Store user information in the session
